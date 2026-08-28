@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Friends & Family Fund</title>
+<link rel="stylesheet" href="src/styles.css?v=13">
+</head>
+<body>
+<header class="site-header">
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true">
+      <span>👥</span>
+    </div>
+    <div class="brand-title">Friends &amp; Family Fund</div>
+  </div>
+  <div class="header-actions">
+    <span id="userLabel"></span>
+    <button id="logoutBtn" class="light">Sign out</button>
+  </div>
+</header>
+
+<main>
+  <section id="loginPanel" class="panel login">
+    <div id="loginView">
+      <h2>Secure Login</h2>
+      <p>Sign in with your registered email and password.</p>
+      <label>Email<input id="email" type="email" autocomplete="username"></label>
+      <label>Password<input id="password" type="password" autocomplete="current-password"></label>
+      <button id="signInBtn" class="primary">Sign in</button>
+      <div class="auth-links">
+        <button id="forgotPasswordBtn" class="link-button" type="button">Forgot Password?</button>
+        <span>•</span>
+        <button id="showSignupBtn" class="link-button" type="button">Create Account</button>
+      </div>
+      <p id="authMessage" class="message"></p>
+    </div>
+
+    <div id="signupView" class="hidden">
+      <h2>Create Member Account</h2>
+      <p>Register with your full name, email and password.</p>
+      <label>Full Name<input id="signupFullName" type="text" autocomplete="name" placeholder="e.g. Nagarjuna"></label>
+      <label>Email<input id="signupEmail" type="email" autocomplete="email" placeholder="you@example.com"></label>
+      <label>Password<input id="signupPassword" type="password" autocomplete="new-password"></label>
+      <label>Confirm Password<input id="signupConfirmPassword" type="password" autocomplete="new-password"></label>
+      <button id="signUpBtn" class="primary">Create Account</button>
+      <div class="auth-links">
+        <button id="backToLoginBtn" class="link-button" type="button">Already have an account? Sign in</button>
+      </div>
+      <p id="signupMessage" class="message"></p>
+    </div>
+
+    <div id="forgotView" class="hidden">
+      <h2>Reset Password</h2>
+      <p>Enter your registered email and we'll send you a secure password reset link.</p>
+      <label>Email<input id="resetEmail" type="email" autocomplete="email"></label>
+      <button id="sendResetBtn" class="primary">Send Reset Link</button>
+      <div class="auth-links">
+        <button id="backFromResetBtn" class="link-button" type="button">Back to Login</button>
+      </div>
+      <p id="resetMessage" class="message"></p>
+    </div>
+
+    <div id="newPasswordView" class="hidden">
+      <h2>Set New Password</h2>
+      <p>Choose a new password for your account.</p>
+      <label>New Password<input id="newPassword" type="password" autocomplete="new-password"></label>
+      <label>Confirm New Password<input id="confirmNewPassword" type="password" autocomplete="new-password"></label>
+      <button id="updatePasswordBtn" class="primary">Update Password</button>
+      <p id="newPasswordMessage" class="message"></p>
+    </div>
+  </section>
+
+  <section id="app" class="hidden">
+    <section class="fund-hero-banner" aria-label="Friends and Family Fund">
+      <div class="hero-orbit hero-orbit-left"></div>
+      <div class="hero-orbit hero-orbit-right"></div>
+      <div class="hero-dots hero-dots-left"></div>
+      <div class="hero-dots hero-dots-right"></div>
+      <div class="hero-laurel hero-laurel-left" aria-hidden="true">❮</div>
+      <div class="hero-laurel hero-laurel-right" aria-hidden="true">❯</div>
+      <div class="hero-line hero-line-left" aria-hidden="true"></div>
+      <div class="hero-line hero-line-right" aria-hidden="true"></div>
+      <div class="hero-medallion" aria-hidden="true">👥</div>
+      <h2>Friends &amp; Family Fund</h2>
+      <p><span>★</span> TOGETHER WE SAVE <b>•</b> TOGETHER WE GROW <span>★</span></p>
+    </section>
+
+    <nav class="tabs">
+      <button data-tab="dashboard" class="active"><span class="nav-icon" aria-hidden="true">⌂</span><span>Dashboard</span></button>
+      <button data-tab="members"><span class="nav-icon" aria-hidden="true">👥</span><span>Members</span></button>
+      <button data-tab="contributions"><span class="nav-icon" aria-hidden="true">₹</span><span>Contributions</span></button>
+      <button data-tab="loans"><span class="nav-icon" aria-hidden="true">♡</span><span>Loans</span></button>
+      <button data-tab="repayments"><span class="nav-icon" aria-hidden="true">▣</span><span>Repayments</span></button>
+      <button data-tab="reports"><span class="nav-icon" aria-hidden="true">▥</span><span>Reports</span></button>
+      <button data-tab="allEmiDetails"><span class="nav-icon" aria-hidden="true">▤</span><span>All EMI Details Recorded</span></button>
+    </nav>
+
+    <section id="dashboard" class="tab">
+      <div class="hero">
+        <div>
+          <h2 id="welcome">Fund Dashboard</h2>
+          <p>Transparent fund information and your individual contribution details.</p>
+        </div>
+      </div>
+
+      <div class="panel fund-overview-intro">
+        <h3>Fund Overview</h3>
+        <p>This section provides a transparent overview of the Friends &amp; Family Fund, including contributions collected from all members, funds currently borrowed through member loans, and the balance available within the fund.</p>
+      </div>
+
+      <div id="metrics" class="cards fund-metrics"></div>
+
+      <div class="panel">
+        <h3>My Contribution &amp; Loan Details</h3>
+        <div id="memberDetails" class="member-details"></div>
+      </div>
+
+      <div class="grid">
+        <div class="panel">
+          <h3>Loan Calculator <small>1% monthly reducing</small></h3>
+          <label>Loan amount<input id="calcAmount" type="number" min="1" value="50000"></label>
+          <label>Tenure (months)<input id="calcMonths" type="number" min="1" max="120" value="12"></label>
+          <div id="calcResults" class="results"></div>
+        </div>
+        <div class="panel">
+          <h3>Fund rules</h3>
+          <ul>
+            <li>Each active member contributes ₹1,000 every month.</li>
+            <li>Loan interest is calculated monthly on outstanding principal.</li>
+            <li>Loan EMI and monthly contribution are separate obligations.</li>
+            <li>Admin records contributions, loan disbursements and repayments.</li>
+            <li>Keep a reserve and maintain an audit trail for every transaction.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="members" class="tab hidden">
+      <div class="section-head"><div><h2>Members</h2><p>Admin can manage members. Members can view only their own profile.</p></div><button id="addMemberBtn" class="primary admin-only">Add member</button></div>
+      <div class="panel table-wrap"><table><thead><tr><th>Code</th><th>Name</th><th>Status</th><th>Monthly</th><th>Role</th><th>Login</th><th id="membersActionsHead" class="admin-only">Actions</th></tr></thead><tbody id="membersBody"></tbody></table></div>
+    </section>
+
+    <section id="contributions" class="tab hidden">
+      <div class="section-head"><div><h2>Contributions</h2><p>Record the monthly ₹1,000 fund contribution.</p></div><button id="addContributionBtn" class="primary admin-only">Record contribution</button></div>
+      <div class="panel table-wrap"><table><thead><tr><th>Member</th><th>Month</th><th>Amount</th><th>Status</th><th>Paid date</th><th>Reference</th><th id="contribActionsHead" class="admin-only">Actions</th></tr></thead><tbody id="contribBody"></tbody></table></div>
+    </section>
+
+    <section id="loans" class="tab hidden">
+      <div class="section-head"><div><h2>Loans</h2><p>Monthly reducing-balance interest with a real EMI ledger. Every EMI is tracked as pending or paid.</p></div><button id="addLoanBtn" class="primary admin-only">Create loan</button></div>
+      <div class="panel table-wrap"><table><thead><tr><th>Loan</th><th>Member</th><th>Principal</th><th>Rate</th><th>Tenure</th><th>EMI</th><th>Status</th><th>Schedule</th><th id="loansActionsHead" class="admin-only">Actions</th></tr></thead><tbody id="loansBody"></tbody></table></div>
+      <div id="schedulePanel" class="panel hidden"><div class="section-head"><h3 id="scheduleTitle">Repayment schedule</h3><button id="closeSchedule">Close</button></div><div class="table-wrap"><table><thead><tr><th>#</th><th>Due</th><th>Opening</th><th>EMI</th><th>Interest</th><th>Principal</th><th>Closing</th><th>Status</th></tr></thead><tbody id="scheduleBody"></tbody></table></div></div>
+    </section>
+
+    <section id="repayments" class="tab hidden">
+      <div class="section-head"><div><h2>EMI Repayments</h2><p>Manage active and closed loans and record EMI payments one installment at a time.</p></div><button id="addRepaymentBtn" class="primary admin-only">Record EMI payment</button></div>
+
+      <div class="loan-status-cards">
+        <button id="activeLoansCard" class="loan-status-card active-loans-card">
+          <span>Active Loans</span><strong id="activeLoansCount">0</strong><small>View all active loans</small>
+        </button>
+        <button id="closedLoansCard" class="loan-status-card closed-loans-card">
+          <span>Closed Loans</span><strong id="closedLoansCount">0</strong><small>View all closed loans</small>
+        </button>
+      </div>
+
+      <div id="adminLoanListPanel" class="panel hidden">
+        <div class="section-head"><div><h3 id="adminLoanListTitle">Active Loans</h3><p id="adminLoanListHint" class="muted">Showing all active loans with their overall scheduled interest and next pending EMI.</p></div><button id="closeAdminLoanList">Close</button></div>
+        <div class="table-wrap"><table><thead><tr><th id="adminLoanH1">Loan No</th><th id="adminLoanH2">Issued Amount</th><th id="adminLoanH3">EMI Date</th><th id="adminLoanH4">EMI Amount</th><th id="adminLoanH5">Principal</th><th id="adminLoanH6">Interest</th><th id="adminLoanH7">View</th><th id="adminLoanH8" class="hidden"></th><th id="adminLoanH9" class="hidden"></th></tr></thead><tbody id="adminLoanListBody"></tbody></table></div>
+      </div>
+
+      <div id="memberRepaymentPanel" class="panel member-repayment-panel">
+        <div class="section-head">
+          <div>
+            <h3>My EMI Repayments</h3>
+            <p class="muted">View the repayment schedule and payment status for your own loan(s). Payments recorded by Admin appear here automatically.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Loan</th><th>EMI #</th><th>Due Date</th><th>Opening Balance</th><th>EMI</th><th>Interest</th><th>Principal</th><th>Closing Balance</th><th>Status</th><th>Paid Date</th></tr></thead>
+            <tbody id="memberRepaymentBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="repaymentSchedulePanel" class="panel hidden">
+        <div class="section-head"><h3 id="repaymentScheduleTitle">Loan EMI Ledger</h3><button id="closeRepaymentSchedule">Close</button></div>
+        <div class="table-wrap"><table><thead><tr><th>#</th><th>Due</th><th>Opening</th><th>EMI</th><th>Interest</th><th>Principal</th><th>Closing</th><th>Status</th></tr></thead><tbody id="repaymentScheduleBody"></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="allEmiDetails" class="tab hidden">
+      <div class="section-head">
+        <div><h2>All EMI Details Recorded</h2><p>View EMI payments recorded across the fund loans.</p></div>
+        <div class="emi-loan-filter-wrap">
+          <label for="allEmiLoanFilter">Loan Number</label>
+          <select id="allEmiLoanFilter" aria-label="Filter EMI details by loan number"><option value="">All Loans</option></select>
+        </div>
+      </div>
+      <div class="panel table-wrap"><table><thead><tr>
+        <th>Loan</th><th>EMI Date</th><th>Amount</th><th>Principal</th><th>Interest</th><th>Payment Date</th><th id="allEmiActionsHead" class="admin-only">Actions</th>
+      </tr></thead><tbody id="allEmiBody"></tbody></table></div>
+    </section>
+
+    <section id="reports" class="tab hidden">
+      <div class="section-head"><div><h2>Fund Report</h2><p>View your contribution and loan details recorded in the fund.</p></div><button id="refreshBtn">Refresh</button></div>
+
+      <div class="panel report-section">
+        <h3>Contribution Details</h3>
+        <p class="muted">This section shows the contribution amount recorded as paid for the fund. Contributions are maintained separately from loan transactions.</p>
+        <div id="reportContributionCard" class="cards"></div>
+      </div>
+
+      <div class="panel report-section">
+        <h3>My Loan Details</h3>
+        <p class="muted">Your own loan information, including the amount issued, repayment tenure, EMI, interest actually paid, total amount paid, and current loan status.</p>
+        <div class="panel table-wrap report-table-wrap"><table><thead><tr>
+          <th>Loan Issued</th><th>Loan No</th><th>Loan Amount</th><th>Tenure</th><th>EMI</th><th>Interest Paid</th><th>Total Amount</th><th>Loan Status</th>
+        </tr></thead><tbody id="reportMyLoansBody"></tbody></table></div>
+      </div>
+
+      <div id="reportOverallLoansSection" class="panel report-section hidden admin-only">
+        <h3>Overall Member Loan Details</h3>
+        <p class="muted">All loans taken by other fund members. The logged-in Admin's own loan is excluded from this section.</p>
+        <div class="panel table-wrap report-table-wrap"><table><thead><tr>
+          <th>Loan Issued</th><th>Loan No</th><th>Loan Amount</th><th>Tenure</th><th>EMI</th><th>Interest Paid</th><th>Total Amount</th><th>Loan Status</th>
+        </tr></thead><tbody id="reportOverallLoansBody"></tbody></table></div>
+      </div>
+
+    </section>
+  </section>
+</main>
+
+<div id="modal" class="modal hidden"><div class="modal-card"><div class="section-head"><h3 id="modalTitle">Add</h3><button id="modalClose">×</button></div><div id="modalBody"></div></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+window.FUND_CONFIG = {
+  supabaseUrl: "https://ckjvqbsnkojfzrukrlum.supabase.co",
+  supabasePublishableKey: "sb_publishable_v-3-Ukr9tmlXp3XHEUGrew_cDu_Q-24"
+};
+</script>
+<script src="src/app.js?v=14"></script>
+</body>
+</html>
